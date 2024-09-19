@@ -122,27 +122,18 @@ class Solution:
 """
 Valid Parentheses
 """
-'(', ')', '{', '}', '[', ']'
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-        checkList = {')' : '(' ,
-                     '}' : '{' ,
-                     ']' : '['}
+        checkList = {')': '(', '}': '{', ']': '['}
+        
         for char in s:
             if char in checkList:
-                if stack and checkList[char] != stack.pop():
-                    return False
+                if stack and stack[-1] == checkList[char]:
+                    stack.pop()
                 else:
-                    stack.append(char)
-        return True
-
-solution = Solution()
-
-# Test cases
-print(solution.isValid("()[]{}"))  # Output: True
-print(solution.isValid("([{}])"))  # Output: True
-print(solution.isValid("({[)]}"))  # Output: False
-print(solution.isValid("(]"))      # Output: False
-print(solution.isValid("{[]}"))    # Output: True
-print(solution.isValid("["))       # Output: False
+                    return False
+            else:
+                stack.append(char)
+                
+        return len(stack) == 0
