@@ -103,6 +103,7 @@ class Solution:
         dummy = ListNode()
         current = dummy
 
+        # Merge sort algorithm
         while list1 and list2:
             if list1.val < list2.val:
                 current.next = list1
@@ -125,6 +126,7 @@ Valid Parentheses
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
+        # Dictionay makes pairing more efficient
         checkList = {')': '(', '}': '{', ']': '['}
         
         for char in s:
@@ -138,6 +140,10 @@ class Solution:
                 
         return len(stack) == 0
 
+"""
+Find the nearest integer of the square root of a non-zero integer
+"""
+
 class Solution:
     def mySqrt(self, x: int) -> int:
         if x == 0 or x == 1:
@@ -146,6 +152,7 @@ class Solution:
         low = 0
         high = x
 
+        # Binary search to reduce complexity
         while high - low > 1:
             mid = (low + high) // 2
             if mid * mid > x:
@@ -154,3 +161,23 @@ class Solution:
                 low = mid
         
         return low
+    
+"""
+Remove Duplicates from Sorted Array
+pop() has complexity of n, making the solution n^2
+"""
+
+class Solution:
+    def removeDuplicates(self, nums: list[int]) -> int:
+        if not nums:
+            return 0
+        unique_pos = 0
+
+        for i in range(1, len(nums)):
+            if nums[i] != nums[unique_pos]:
+                unique_pos += 1
+                nums[unique_pos] = nums[i]
+
+        nums[:] = nums[:unique_pos + 1]
+        return unique_pos + 1
+
