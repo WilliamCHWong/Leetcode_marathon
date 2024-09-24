@@ -137,3 +137,20 @@ class Solution:
                 stack.append(char)
                 
         return len(stack) == 0
+
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x == 0 or x == 1:
+            return x
+
+        low = 0
+        high = x
+
+        while high - low > 1:
+            mid = (low + high) // 2
+            if mid * mid > x:
+                high = mid
+            else:
+                low = mid
+        
+        return low
