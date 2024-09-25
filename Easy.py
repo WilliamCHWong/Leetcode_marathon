@@ -165,6 +165,7 @@ class Solution:
 """
 Remove Duplicates from Sorted Array
 pop() has complexity of n, making the solution n^2
+use two pointers
 """
 
 class Solution:
@@ -180,4 +181,22 @@ class Solution:
 
         nums[:] = nums[:unique_pos + 1]
         return unique_pos + 1
+
+"""
+Remove Element
+use two pointers
+"""
+
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        if not nums:
+            return 0
+        k = 0
+        for i in range(len(nums)):
+            if nums[i] != val:
+                nums[k] = nums[i]
+                k += 1
+        nums[:] = nums[:k]
+        return k
+    
 
