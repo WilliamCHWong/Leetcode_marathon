@@ -204,6 +204,7 @@ Find the Index of the First Occurrence in a String
 """
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
+        # Len will be called for times
         hayLen = len(haystack)
         neeLen = len(needle)
 
@@ -211,6 +212,7 @@ class Solution:
             return -1
         
         for i in range (0, hayLen):
+            # Start comparison if the remaining string is longer than needle
             if haystack[i] == needle[0] and (hayLen - i) >= neeLen:
                 result = i
                 isFull = True
