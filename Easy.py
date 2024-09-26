@@ -199,4 +199,25 @@ class Solution:
         nums[:] = nums[:k]
         return k
     
+"""
+Find the Index of the First Occurrence in a String
+"""
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        hayLen = len(haystack)
+        neeLen = len(needle)
+
+        if hayLen == 0 or neeLen == 0 or neeLen > hayLen:
+            return -1
+        
+        for i in range (0, hayLen):
+            if haystack[i] == needle[0] and (hayLen - i) >= neeLen:
+                result = i
+                isFull = True
+                for j in range(0, len(needle)):
+                    if needle[j] != haystack[i + j]:
+                        isFull = False
+                if isFull:
+                    return result
+        return -1
 
