@@ -223,3 +223,11 @@ class Solution:
                 if isFull:
                     return result
         return -1
+    
+"""
+Search Insert Position
+"""
+
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        
