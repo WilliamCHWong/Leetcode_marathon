@@ -230,4 +230,30 @@ Search Insert Position
 
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
+        low = 0
+        high = len(nums) - 1
+
+        if target <= nums [0]:
+            return 0
         
+        if target >= nums[high]:
+            return high + 1
+        
+        while high > low + 1:
+            mid = (high + low) //2
+            if target > nums[mid]:
+                low = mid
+            elif target < nums[mid]:
+                high = mid
+            else:
+                return mid
+        return high
+    
+solution = Solution()
+list1 = [1, 3, 5, 6]
+target1 = 5
+target2 = 2
+target3 = 7
+print(solution.searchInsert(list1, target1))
+print(solution.searchInsert(list1, target2))
+print(solution.searchInsert(list1, target3))
