@@ -235,8 +235,9 @@ class Solution:
 
         if target <= nums [0]:
             return 0
-        
-        if target >= nums[high]:
+        elif target == nums[high]:
+            return high
+        elif target > nums[high]:
             return high + 1
         
         while high > low + 1:
@@ -248,12 +249,3 @@ class Solution:
             else:
                 return mid
         return high
-    
-solution = Solution()
-list1 = [1, 3, 5, 6]
-target1 = 5
-target2 = 2
-target3 = 7
-print(solution.searchInsert(list1, target1))
-print(solution.searchInsert(list1, target2))
-print(solution.searchInsert(list1, target3))
