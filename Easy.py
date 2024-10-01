@@ -268,3 +268,38 @@ class Solution:
             i -= 1
             
         return length
+
+"""
+Plus One
+"""
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        n = len(digits) - 1 
+        i = n
+        while i >= 0:
+            if digits[i] != 9:
+                digits[i] += 1
+                return digits
+            else:
+                digits[i] = 0
+                i -= 1
+        digits.append(0)
+        n += 1
+        while n > 0:
+            digits[n] = digits[n - 1]
+            n -= 1
+        digits[0] = 1
+        return digits
+
+solution = Solution()
+testDigit1 = [1,2,3]
+testDigit2 = [4,3,2,1]
+testDigit3 = [9]
+testDigit4 = [9,9,9]
+testDigit5 = [8,9,9]
+
+print(solution.plusOne(testDigit1))
+print(solution.plusOne(testDigit2))
+print(solution.plusOne(testDigit3))
+print(solution.plusOne(testDigit4))
+print(solution.plusOne(testDigit5))
