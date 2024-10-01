@@ -249,3 +249,20 @@ class Solution:
             else:
                 return mid
         return high
+
+"""
+Length of last word
+"""
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        words = s.strip().split()
+        return len(words[-1]) if words else 0
+
+solution = Solution()
+input1 = "Hello World"
+input2 = "   fly me   to   the moon  "
+input3 = "luffy is still joyboy"
+
+print(solution.lengthOfLastWord(input1))
+print(solution.lengthOfLastWord(input2))
+print(solution.lengthOfLastWord(input3))
