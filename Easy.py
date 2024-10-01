@@ -255,14 +255,16 @@ Length of last word
 """
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
-        words = s.strip().split()
-        return len(words[-1]) if words else 0
+        n = len(s)
+        i = n - 1
+        # Skip trailing spaces
+        while i >= 0 and s[i] == " ":
+            i -= 1
 
-solution = Solution()
-input1 = "Hello World"
-input2 = "   fly me   to   the moon  "
-input3 = "luffy is still joyboy"
-
-print(solution.lengthOfLastWord(input1))
-print(solution.lengthOfLastWord(input2))
-print(solution.lengthOfLastWord(input3))
+        # Count the length of the last word
+        length = 0
+        while i >= 0 and s[i] != " ":
+            length += 1
+            i -= 1
+            
+        return length
