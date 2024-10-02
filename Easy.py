@@ -301,11 +301,22 @@ class Solution:
         # Convert to string and remove prefix 0b
         return bin(sum)[2:]
 
+"""
+Climbing Stairs
+"""
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        
+        def fibonacci(n):
+            phi = (1 + 5**0.5) / 2
+            psi = (1 - 5**0.5) / 2
+            return int((phi**n - psi**n) / (5**0.5))
+        
+        return fibonacci(n + 1)
+    
 solution = Solution()
-a1 = "11"
-b1 = "1"
-a2 = "1010"
-b2 = "1011"
-
-print(solution.addBinary(a1, b1))
-print(solution.addBinary(a2, b2))
+print(solution.climbStairs(5))
