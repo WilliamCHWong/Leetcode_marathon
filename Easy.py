@@ -289,17 +289,23 @@ class Solution:
             digits[n] = digits[n - 1]
             n -= 1
         digits[0] = 1
-        return digits
+        return 
+
+"""
+Add Binary
+"""
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        # Convert to decimal numbers
+        sum = int(a, 2) + int(b, 2)
+        # Convert to string and remove prefix 0b
+        return bin(sum)[2:]
 
 solution = Solution()
-testDigit1 = [1,2,3]
-testDigit2 = [4,3,2,1]
-testDigit3 = [9]
-testDigit4 = [9,9,9]
-testDigit5 = [8,9,9]
+a1 = "11"
+b1 = "1"
+a2 = "1010"
+b2 = "1011"
 
-print(solution.plusOne(testDigit1))
-print(solution.plusOne(testDigit2))
-print(solution.plusOne(testDigit3))
-print(solution.plusOne(testDigit4))
-print(solution.plusOne(testDigit5))
+print(solution.addBinary(a1, b1))
+print(solution.addBinary(a2, b2))
