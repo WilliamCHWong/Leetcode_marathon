@@ -318,5 +318,26 @@ class Solution:
         
         return fibonacci(n + 1)
     
-solution = Solution()
-print(solution.climbStairs(5))
+"""
+Remove duplicates from sorted list
+"""
+
+# Definition for singly-linked list.
+
+class ListNode:
+     def __init__(self, val=0, next=None):
+         self.val = val
+         self.next = next
+
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:  # Check if the list is empty
+            return None
+        
+        current = head
+        while current and current.next:
+            if current.next.val == current.val:
+                current.next = current.next.next  # Skip the duplicate
+            else:
+                current = current.next  # Move to the next distinct element
+        return head
