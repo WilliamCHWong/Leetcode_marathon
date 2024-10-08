@@ -1,3 +1,5 @@
+from typing import List, Optional
+
 """
 94. Binary Tree Inorder Traversal
 """
