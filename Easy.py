@@ -1,4 +1,6 @@
-# Two Sum
+"""
+1. Two Sum
+"""
 # Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 from typing import List
 
@@ -12,7 +14,9 @@ class Solution:
             record[num] = i
         return []
     
-# Palindrome Number
+"""
+9. Palindrome Number
+"""
 # Given an integer x, return true if x is a palindrome, and false otherwise.
 
 class Solution:
@@ -29,7 +33,7 @@ class Solution:
         return x == mirror
 
 """
-Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+13. Roman to Integer
 
 Symbol       Value
 I             1
@@ -75,7 +79,8 @@ class Solution:
         return result
 
 """
-Longest Common Prefix
+14. Longest Common Prefix
+
 Write a function to find the longest common prefix string amongst an array of strings.
 If there is no common prefix, return an empty string "".
 """
@@ -90,7 +95,7 @@ class Solution:
         return result
     
 """
-Merge Two Sorted Lists
+21. Merge Two Sorted Lists
 """
 from typing import Optional
 # Definition for singly-linked list.
@@ -121,7 +126,7 @@ class Solution:
         return dummy.next
 
 """
-Valid Parentheses
+20. Valid Parentheses
 """
 class Solution:
     def isValid(self, s: str) -> bool:
@@ -141,33 +146,10 @@ class Solution:
         return len(stack) == 0
 
 """
-Find the nearest integer of the square root of a non-zero integer
+26. Remove Duplicates from Sorted Array
 """
-
-class Solution:
-    def mySqrt(self, x: int) -> int:
-        if x == 0 or x == 1:
-            return x
-
-        low = 0
-        high = x
-
-        # Binary search to reduce complexity
-        while high - low > 1:
-            mid = (low + high) // 2
-            if mid * mid > x:
-                high = mid
-            else:
-                low = mid
-        
-        return low
-    
-"""
-Remove Duplicates from Sorted Array
-pop() has complexity of n, making the solution n^2
-use two pointers
-"""
-
+# pop() has complexity of n, making the solution n^2
+# use two pointers
 class Solution:
     def removeDuplicates(self, nums: list[int]) -> int:
         if not nums:
@@ -377,3 +359,16 @@ class Solution:
                 k -= 1
             i -= 1
 
+"""
+118. Pascal's Triangle
+"""
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        result = [[1]]
+        for j in range(numRows - 1):
+            oldRow = [0] + result[-1] + [0]
+            newRow = []
+            for i in range(j + 2):
+                newRow.append(oldRow[i] + oldRow[i + 1])
+            result.append(newRow)
+        return result

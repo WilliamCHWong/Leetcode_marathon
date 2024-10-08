@@ -142,3 +142,27 @@ class Solution:
         if not root.right:
             return self.minDepth(root.left) + 1
         return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+    
+"""
+112. Path Sum
+"""
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if not root:
+            return False
+       
+        # Check if it is a leaf 
+        if not root.left and not root.right and targetSum == root.val:
+            return True
+
+        # Recursively check the left and right subtrees
+        targetSum -= root.val
+        return (self.hasPathSum(root.left, targetSum) or 
+                self.hasPathSum(root.right, targetSum))
+    
