@@ -470,6 +470,8 @@ class Solution:
             if root is None:
                 return 0, True
             left_depth, left_balanced = depth_and_balanced(root.left)
+            if left_balanced is False:
+                return 0, False
             right_depth, right_balanced = depth_and_balanced(root.right)
 
             current_depth = 1 + max(left_depth, right_depth)
