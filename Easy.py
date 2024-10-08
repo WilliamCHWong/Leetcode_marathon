@@ -454,3 +454,27 @@ class Solution:
              root.right = buildTree(mid + 1, right)
              return root
          return buildTree(0, len(nums) - 1)
+"""
+Balanced binary tree
+"""
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+
+        def depth_and_balanced(root):
+            if root is None:
+                return 0, True
+            left_depth, left_balanced = depth_and_balanced(root.left)
+            right_depth, right_balanced = depth_and_balanced(root.right)
+
+            current_depth = 1 + max(left_depth, right_depth)
+
+            return current_depth, abs(left_depth - right_depth) <= 1 and left_balanced and right_balanced
+        
+        _, balanced = depth_and_balanced(root)
+        return balanced
