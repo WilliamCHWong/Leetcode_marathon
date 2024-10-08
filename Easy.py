@@ -183,7 +183,7 @@ class Solution:
         return unique_pos + 1
 
 """
-Remove Element
+27. Remove Element
 use two pointers
 """
 
@@ -200,10 +200,7 @@ class Solution:
         return k
     
 """
-Find the Index of the First Occurrence in a String
-
-
-
+28. Find the Index of the First Occurrence in a String
 """
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
@@ -225,7 +222,7 @@ class Solution:
         return -1
     
 """
-Search Insert Position
+35. Search Insert Position
 """
 
 class Solution:
@@ -251,7 +248,7 @@ class Solution:
         return high
 
 """
-Length of last word
+58. Length of last word
 """
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
@@ -270,7 +267,7 @@ class Solution:
         return length
 
 """
-Plus One
+66. Plus One
 """
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
@@ -292,7 +289,7 @@ class Solution:
         return 
 
 """
-Add Binary
+67. Add Binary
 """
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
@@ -300,9 +297,29 @@ class Solution:
         sum = int(a, 2) + int(b, 2)
         # Convert to string and remove prefix 0b
         return bin(sum)[2:]
+"""
+69. Sqrt(x)
+"""
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x == 0 or x == 1:
+            return x
+
+        low = 0
+        high = x
+
+        while high - low > 1:
+            mid = (low + high) // 2
+            if mid * mid > x:
+                high = mid
+            else:
+                low = mid
+        
+        return low
+
 
 """
-Climbing Stairs
+70. Climbing Stairs
 """
 class Solution:
     def climbStairs(self, n: int) -> int:
@@ -319,7 +336,7 @@ class Solution:
         return fibonacci(n + 1)
     
 """
-Remove duplicates from sorted list
+83. Remove Duplicates from Sorted List
 """
 
 # Definition for singly-linked list.
@@ -343,7 +360,7 @@ class Solution:
         return head
 
 """
-Merge Sorted Array
+88. Merge Sorted Array
 """
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
@@ -360,123 +377,3 @@ class Solution:
                 k -= 1
             i -= 1
 
-"""
-Binary Tree Inorder Traversal
-"""
-# Definition for a binary tree node.
-class TreeNode:
-     def __init__(self, val=0, left=None, right=None):
-         self.val = val
-         self.left = left
-         self.right = right
-
-class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        if root is None:
-            return []
-        return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
-
-"""
-Same Tree
-"""
-# Definition for a binary tree node.
-class TreeNode:
-     def __init__(self, val=0, left=None, right=None):
-         self.val = val
-         self.left = left
-         self.right = right
-class Solution:
-    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        # If both nodes are None, trees are the same
-        if not p and not q:
-            return True
-        # If one of the nodes is None, trees are not the same
-        if not p or not q:
-            return False
-        # Check if current node values are the same and recurse on children
-        return (p.val == q.val) and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
-    
-    """
-    Maximum depth of binary tree
-    """
-    # Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def maxDepth(self, root: Optional[TreeNode]) -> int:
-        if root == None:
-            return 0
-        left = self.maxDepth(root.left)
-        right = self.maxDepth(root.right)
-        return left + 1 if left > right else right + 1
-    
-"""
-Symmetric tree
-"""
-
-# Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        def compare(left, right):
-            if not left and not right:
-                return True
-            if not left or not right:
-                return False
-            
-            return (left.val == right.val) and compare(left.left, right.right) and compare(left.right, right.left)
-        return compare(root.left, root.right)
-    
-"""
-Convert Sorted Array to Binary Search Tree
-"""
-# Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
-         def buildTree(left, right):
-             if left > right:
-                 return None
-             mid = (left + right) // 2
-             root = TreeNode(nums[mid])
-             root.left = buildTree(left, mid - 1)
-             root.right = buildTree(mid + 1, right)
-             return root
-         return buildTree(0, len(nums) - 1)
-"""
-Balanced binary tree
-"""
-# Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def isBalanced(self, root: Optional[TreeNode]) -> bool:
-
-        def depth_and_balanced(root):
-            if root is None:
-                return 0, True
-            left_depth, left_balanced = depth_and_balanced(root.left)
-            if left_balanced is False:
-                return 0, False
-            right_depth, right_balanced = depth_and_balanced(root.right)
-
-            current_depth = 1 + max(left_depth, right_depth)
-
-            return current_depth, abs(left_depth - right_depth) <= 1 and left_balanced and right_balanced
-        
-        _, balanced = depth_and_balanced(root)
-        return balanced
