@@ -372,3 +372,15 @@ class Solution:
                 newRow.append(oldRow[i] + oldRow[i + 1])
             result.append(newRow)
         return result
+    
+"""
+119. Pascal's Triangle II
+"""
+import math
+
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        result = []
+        for i in range(rowIndex + 1):
+            result.append(int(math.factorial(rowIndex) / (math.factorial(i) * math.factorial(rowIndex - i))))
+        return result
