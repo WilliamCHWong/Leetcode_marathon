@@ -384,3 +384,18 @@ class Solution:
         for i in range(rowIndex + 1):
             result.append(int(math.factorial(rowIndex) / (math.factorial(i) * math.factorial(rowIndex - i))))
         return result
+    
+"""
+121. Best Time to Buy and Sell Stock
+"""
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        min = float('inf')
+        maxProfit = 0
+        for price in prices:
+            if price < min:
+                min = price
+            else:
+                profit = price - min
+                maxProfit = max(profit, maxProfit)
+        return maxProfit
