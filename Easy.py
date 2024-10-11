@@ -421,3 +421,14 @@ class Solution:
             right -= 1
 
         return True
+
+"""
+136. Single Number
+"""
+def singleNumber(self, nums: List[int]) -> int:
+    result = 0
+    for num in nums:
+        result ^= num
+    return result
+
+# XOR can cancel out identical numbers on bit level
