@@ -184,3 +184,17 @@ class Solution:
         result.extend(self.preorderTraversal(root.left))
         result.extend(self.preorderTraversal(root.right))
         return result
+
+"""
+145. Binary Tree Postorder Traversal
+"""
+    
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if root is None:
+            return []
+        result = []
+        result.extend(self.postorderTraversal(root.left))
+        result.extend(self.postorderTraversal(root.right))
+        result.append(root.val)
+        return result
