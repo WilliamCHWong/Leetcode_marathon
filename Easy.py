@@ -432,3 +432,14 @@ def singleNumber(self, nums: List[int]) -> int:
     return result
 
 # XOR can cancel out identical numbers on bit level
+"""
+168. Excel Sheet Column Title
+"""
+class Solution:
+    def convertToTitle(self, columnNumber: int) -> str:
+        result = ''
+        while columnNumber > 0:
+            columnNumber -= 1
+            result += chr(65 + columnNumber % 26)  # 'A' is 65 in ASCII
+            columnNumber //= 26
+        return result[::-1]
