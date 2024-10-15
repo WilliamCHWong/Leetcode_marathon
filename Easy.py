@@ -443,3 +443,19 @@ class Solution:
             result += chr(65 + columnNumber % 26)  # 'A' is 65 in ASCII
             columnNumber //= 26
         return result[::-1]
+    
+"""
+169. Majority Element
+"""
+# Boyer-Moore Voting Algorithm
+class Solution:
+    def majorityElement(self, nums: list[int]) -> int:
+        candidate = None
+        count = 0
+        
+        for num in nums:
+            if count == 0:
+                candidate = num
+            count += (1 if num == candidate else -1)
+        
+        return candidate
