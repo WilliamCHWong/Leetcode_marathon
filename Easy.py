@@ -459,3 +459,13 @@ class Solution:
             count += (1 if num == candidate else -1)
         
         return candidate
+
+"""
+171. Excel Sheet Column Number
+"""
+class Solution:
+    def titleToNumber(self, columnTitle: str) -> int:
+        result = 0
+        for i, char in enumerate(reversed(columnTitle)):
+            result += (ord(char) - ord('A') + 1) * (26 ** i)
+        return result
