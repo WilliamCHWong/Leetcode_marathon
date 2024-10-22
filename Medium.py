@@ -50,3 +50,26 @@ class Solution:
                 length = len(even_palindrome)
 
         return result
+
+"""
+6. Zigzag Conversion
+"""
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1 or numRows >= len(s):
+            return s
+        
+        rows = [''] * numRows  # Use list comprehension for cleaner initialization
+        
+        r, move = 0, 1  # `move` will determine direction
+        
+        for char in s:
+            rows[r] += char
+            if r == 0:
+                move = 1  # Move down
+            elif r == numRows - 1:
+                move = -1  # Move up
+            r += move
+        
+        # Join all rows into one string
+        return ''.join(rows)
