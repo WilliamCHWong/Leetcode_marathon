@@ -90,3 +90,38 @@ class Solution:
                 return 0
             result = result * 10 + digit
         return result * sign
+
+"""
+8. String to Integer (atoi)
+"""
+def myAtoi(s: str) -> int:
+    result = 0
+    sign = 1
+    int_max = 2 ** 31
+    isInitial = True
+
+    # Remove leading space
+    s = s.lstrip()
+
+    for char in s:
+        if char.isnumeric():
+            result = result * 10 + int(char)
+        elif isInitial:
+            if char == '-':
+                sign = -1
+            elif char == '+':
+                sign = 1
+            else:
+                break
+        else:
+            break
+        isInitial = False
+
+    if sign > 0 and result > int_max - 1:
+        result = int_max - 1
+    
+    if sign < 0 and result > int_max:
+        result = int_max
+ 
+    return result * sign
+
