@@ -4,7 +4,7 @@
 # Apply concept of sliding window and set
 
 from ast import List
-
+from typing import List
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
@@ -131,8 +131,6 @@ def myAtoi(s: str) -> int:
 """
 11. Container With Most Water
 """
-from typing import List
-
 def maxArea(height: List[int]) -> int:
     left, right = 0, len(height) - 1
     max_area = 0
@@ -148,5 +146,30 @@ def maxArea(height: List[int]) -> int:
     
     return max_area
 
-testheight = [8, 7, 2, 1]
-print(maxArea(testheight))
+"""
+12. Integer to Roman
+"""
+def intToRoman(num: int) -> str:
+    val = [
+        1000, 900, 500, 400,
+        100, 90, 50, 40,
+        10, 9, 5, 4,
+        1
+        ]
+    symbols = [
+        "M", "CM", "D", "CD",
+        "C", "XC", "L", "XL",
+        "X", "IX", "V", "IV",
+        "I"
+        ]
+    result = ""
+    i = 0
+    while num > 0:
+        # Divide each value on the list
+        for _ in range(num // val[i]):
+            result += symbols[i]
+            num -= val[i]
+        # Move along the list
+        i += 1
+    
+    return result
