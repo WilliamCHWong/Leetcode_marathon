@@ -3,6 +3,9 @@
 """
 # Apply concept of sliding window and set
 
+from ast import List
+
+
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         unique_set = set()
@@ -125,3 +128,25 @@ def myAtoi(s: str) -> int:
  
     return result * sign
 
+"""
+11. Container With Most Water
+"""
+from typing import List
+
+def maxArea(height: List[int]) -> int:
+    left, right = 0, len(height) - 1
+    max_area = 0
+
+    while left < right:
+        area = min(height[left], height[right]) * (right - left)
+        max_area = max(area, max_area)
+
+        if height[left] < height[right]:
+            left += 1
+        else:
+            right -= 1
+    
+    return max_area
+
+testheight = [8, 7, 2, 1]
+print(maxArea(testheight))
