@@ -173,3 +173,39 @@ def intToRoman(num: int) -> str:
         i += 1
     
     return result
+
+"""
+15. 3Sum
+"""
+def threeSum(nums: List[int]) -> List[List[int]]:
+    nums.sort()  # Step 1: Sort the array
+    res = []
+
+    # Step 2: Iterate through the array with the fixed element `i`
+    for i in range(len(nums) - 2):
+        if i > 0 and nums[i] == nums[i - 1]:  # Skip duplicates
+            continue
+
+        # Initialize two pointers
+        left, right = i + 1, len(nums) - 1
+
+        while left < right:
+            total = nums[i] + nums[left] + nums[right]
+            if total == 0:
+                res.append([nums[i], nums[left], nums[right]])
+
+                # Move the left and right pointers and avoid duplicates
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+
+                left += 1
+                right -= 1
+
+            elif total < 0:
+                left += 1  # Increase the sum
+            else:
+                right -= 1  # Decrease the sum
+
+    return res
