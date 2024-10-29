@@ -214,21 +214,25 @@ def threeSum(nums: List[int]) -> List[List[int]]:
 16. 3Sum Closest
 """
 def threeSumClosest(nums: List[int], target: int) -> int:
-    closest_sum = 0
-    end = len(nums) - 1
-    alter = 1
+        nums.sort()  # Sort the array first
+        closest_sum = sum(nums[:3])  # Initialize with the sum of the first three elements
 
-    for i in range(end - 1):
-        left, right = i + 1, end
+        for i in range(len(nums) - 2):
+            left, right = i + 1, len(nums) - 1
 
-        while left < right:
-            sum = nums[i] + nums[left] + nums[right]
-            if abs(sum - target) < abs(closest_sum - target):
-                closest_sum = sum
-            if alter > 0:
-                left += 1
-            else:
-                right -= 1
-            alter *= -1
-    
-    return closest_sum
+            while left < right:
+                current_sum = nums[i] + nums[left] + nums[right]
+                
+                # Update the closest sum if the current sum is closer to the target
+                if abs(current_sum - target) < abs(closest_sum - target):
+                    closest_sum = current_sum
+                
+                # Move pointers to try and get closer to the target
+                if current_sum < target:
+                    left += 1
+                elif current_sum > target:
+                    right -= 1
+                else:  # If exact target sum is found
+                    return target
+
+        return closest_sum
