@@ -240,7 +240,32 @@ def threeSumClosest(nums: List[int], target: int) -> int:
 """
 17. Letter Combinations of a Phone Number
 """
-def letterCombinations(digits: str) -> List[str]:
-    result = []
-    for digit in digits:
+from typing import List
+
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
         
+        keyboard = {
+            "2": ["a", "b", "c"],
+            "3": ["d", "e", "f"],
+            "4": ["g", "h", "i"],
+            "5": ["j", "k", "l"],
+            "6": ["m", "n", "o"],
+            "7": ["p", "q", "r", "s"],
+            "8": ["t", "u", "v"],
+            "9": ["w", "x", "y", "z"]
+        }
+
+        result = [""]  # Start with an initial empty combination
+
+        for digit in digits:
+            temp = []
+            newletters = keyboard.get(digit)
+            for item in result:
+                for newletter in newletters:
+                    temp.append(item + newletter)
+            result = temp
+
+        return result
