@@ -209,3 +209,26 @@ def threeSum(nums: List[int]) -> List[List[int]]:
                 right -= 1  # Decrease the sum
 
     return res
+
+"""
+16. 3Sum Closest
+"""
+def threeSumClosest(nums: List[int], target: int) -> int:
+    closest_sum = 0
+    end = len(nums) - 1
+    alter = 1
+
+    for i in range(end - 1):
+        left, right = i + 1, end
+
+        while left < right:
+            sum = nums[i] + nums[left] + nums[right]
+            if abs(sum - target) < abs(closest_sum - target):
+                closest_sum = sum
+            if alter > 0:
+                left += 1
+            else:
+                right -= 1
+            alter *= -1
+    
+    return closest_sum
