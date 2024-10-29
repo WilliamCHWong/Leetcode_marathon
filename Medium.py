@@ -236,3 +236,11 @@ def threeSumClosest(nums: List[int], target: int) -> int:
                     return target
 
         return closest_sum
+
+"""
+17. Letter Combinations of a Phone Number
+"""
+def letterCombinations(digits: str) -> List[str]:
+    result = []
+    for digit in digits:
+        
