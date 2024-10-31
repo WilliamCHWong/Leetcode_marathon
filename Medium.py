@@ -273,3 +273,47 @@ class Solution:
 """
 18. 4Sum
 """
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        nums.sort()
+        result, quadruplet = [], []
+
+        def Sum(k, start, target):
+            # Base case (Two sum problem)
+            if k == 2:
+                left, right = start, len(nums) - 1
+                # Two pointers
+                while left < right:
+                    current_sum = nums[left] + nums[right]
+                    if current_sum < target:
+                        left += 1
+                    elif current_sum > target:
+                        right -= 1
+                    else:
+                        result.append(quadruplet + [nums[left], nums[right]])
+                        left += 1
+                        right -= 1
+                        # Skip duplicates
+                        while left < right and nums[left] == nums[left - 1]:
+                            left += 1
+                        while left < right and nums[right] == nums[right + 1]:
+                            right -= 1
+            else:
+                for i in range(start, len(nums) - k + 1):
+                    # Skip duplicates
+                    if i > start and nums[i] == nums[i - 1]:
+                        continue
+                    quadruplet.append(nums[i])
+                    # Recursive call to reduce k
+                    Sum(k - 1, i + 1, target - nums[i])
+                    quadruplet.pop()
+        
+        Sum(4, 0, target)
+        
+        # Remove duplicate quadruplets
+        unique_result = []
+        for quad in result:
+            if quad not in unique_result:
+                unique_result.append(quad)
+        
+        return unique_result
