@@ -317,3 +317,29 @@ class Solution:
                 unique_result.append(quad)
         
         return unique_result
+
+"""
+22. Generate Parentheses
+"""
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        result = []
+        
+        # Define a helper function to perform backtracking
+        def backtrack(current_string, open_count, close_count):
+            # Base case: if we have used up all open and close parentheses
+            if len(current_string) == 2 * n:
+                result.append(current_string)
+                return
+            
+            # If we can add an open parenthesis, add it and recurse
+            if open_count < n:
+                backtrack(current_string + "(", open_count + 1, close_count)
+            
+            # If we can add a close parenthesis, add it and recurse
+            if close_count < open_count:
+                backtrack(current_string + ")", open_count, close_count + 1)
+        
+        # Start the backtracking process with an empty string and zero counts
+        backtrack("", 0, 0)
+        return result
