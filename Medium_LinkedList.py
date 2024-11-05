@@ -6,6 +6,7 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         last_digit = ListNode()
@@ -50,4 +51,25 @@ class Solution:
         slow.next = slow.next.next
         
         return dummy.next
-
+"""
+24. Swap Nodes in Pairs
+"""
+def swapPairs(head: Optional[ListNode]) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    dummy.next = head
+    prev = dummy
+    
+    while prev.next and prev.next.next:
+        # Nodes to be swapped
+        first = prev.next
+        second = first.next
+        
+        # Swapping
+        first.next = second.next
+        second.next = first
+        prev.next = second
+        
+        # Move `prev` two nodes ahead
+        prev = first
+    
+    return dummy.next
