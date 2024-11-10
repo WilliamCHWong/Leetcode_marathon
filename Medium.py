@@ -445,3 +445,32 @@ class Solution:
         
         # Target not found
         return -1
+
+"""
+34. Find First and Last Position of Element in Sorted Array
+"""
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        max = len(nums) - 1
+        left, right = 0, max
+      
+        while left <= right:
+            mid = (left + right) // 2
+            
+            # Check if the middle element is the target
+            if nums[mid] == target:
+                first, last = mid, mid
+                while nums[first] == target and first >= 0:
+                    first -= 1
+                while last <= max and nums[last] == target:
+                    last += 1
+                return [first + 1, last - 1]
+            
+            # Determine if the left half is sorted
+            if target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        
+        # Target not found
+        return [-1, -1] 
