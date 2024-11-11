@@ -511,3 +511,33 @@ class Solution:
                 return False
         
         return True
+    
+"""
+38. Count and Say
+"""
+class Solution:
+    def countAndSay(self, n: int) -> str:
+
+        def convert(RLE: str) -> str:
+            result = ""
+            count = 1
+            
+            # Iterate through RLE to count consecutive characters
+            for i in range(1, len(RLE)):
+                if RLE[i] == RLE[i - 1]:
+                    count += 1
+                else:
+                    # Append the count and character to the result
+                    result += str(count) + RLE[i - 1]
+                    count = 1
+            
+            # Append the last group
+            result += str(count) + RLE[-1]
+            return result
+
+        # Base case
+        if n == 1:
+            return "1"
+        
+        # Recursive call
+        return convert(self.countAndSay(n - 1))
