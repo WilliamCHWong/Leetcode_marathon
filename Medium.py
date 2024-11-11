@@ -473,4 +473,41 @@ class Solution:
                 left = mid + 1
         
         # Target not found
-        return [-1, -1] 
+        return [-1, -1]
+    
+"""
+36. Valid Sudoku
+"""
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        # Use a set to check for duplicates, ignoring '.'
+        def check_duplicate(nums):
+            nums = [num for num in nums if num != '.']
+            return len(nums) != len(set(nums))
+
+        blocks = [[] for _ in range(9)]
+        columns = [[] for _ in range(9)]
+
+        # Iterate over each row and column
+        for rowth, row in enumerate(board):
+            # Check each row for duplicates
+            if check_duplicate(row):
+                return False
+            
+            for i, num in enumerate(row):
+                # Update the cell in the corresponding block and column
+                if num != '.':
+                    blocks[(rowth // 3) * 3 + i // 3].append(num)
+                    columns[i].append(num)
+        
+        # Check each block for duplicates
+        for block in blocks:
+            if check_duplicate(block):
+                return False
+        
+        # Check each column for duplicates
+        for column in columns:
+            if check_duplicate(column):
+                return False
+        
+        return True
