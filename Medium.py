@@ -541,3 +541,29 @@ class Solution:
         
         # Recursive call
         return convert(self.countAndSay(n - 1))
+
+"""
+39. Combination Sum
+"""
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def findRemain(remain: int, path: List[int]) -> List[List[int]]:
+            # If the remainder is zero, we found a combination
+            if remain == 0:
+                return [path]
+            
+            result = []
+            for num in candidates:
+                # Only proceed if num is less than or equal to the remainder
+                if num <= remain:
+                    result += findRemain(remain - num, path + [num])
+            
+            return result
+
+        solutions = findRemain(target, [])
+        
+        # Remove duplicates
+        unique_solutions = set(tuple(sorted(solution)) for solution in solutions)
+        
+        # Convert back to a list of lists
+        return [list(solution) for solution in unique_solutions]
