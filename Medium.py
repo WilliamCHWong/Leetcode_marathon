@@ -567,3 +567,31 @@ class Solution:
         
         # Convert back to a list of lists
         return [list(solution) for solution in unique_solutions]
+
+"""
+40. Combination Sum II
+"""
+from typing import List
+
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()  # Sort to handle duplicates
+        results = []
+
+        def dfs(choices: List[int], remain: int, start: int, path: List[int]):
+            if remain == 0:
+                results.append(path)
+                return
+
+            for i in range(start, len(choices)):
+                # Skip duplicates
+                if i > start and choices[i] == choices[i - 1]:
+                    continue
+
+                if choices[i] > remain:
+                    break  # No point in continuing if the number is greater than remaining target
+
+                dfs(choices, remain - choices[i], i + 1, path + [choices[i]])
+
+        dfs(candidates, target, 0, [])
+        return results
