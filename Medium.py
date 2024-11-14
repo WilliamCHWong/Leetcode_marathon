@@ -595,3 +595,21 @@ class Solution:
 
         dfs(candidates, target, 0, [])
         return results
+
+"""
+43. Multiply Strings
+"""
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        m, n = len(num1), len(num2)
+        result = [0] * (m + n)
+        for i in range(m - 1, -1, -1):
+            for j in range(n - 1, -1, -1):
+                multiple = int(num1[i]) * int(num2[j])
+                multiple += result[i + j + 1]
+                result[i + j + 1] = multiple % 10
+                result[i + j] += multiple // 10
+        
+        result_str = ''.join(map(str, result)).lstrip('0')
+        
+        return result_str if result_str else "0"
