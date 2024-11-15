@@ -637,5 +637,17 @@ def jump(nums: List[int]) -> int:
     return jumps
 
 
-nums = [2,3,1,1,4]
-print(jump(nums))
+def permute(nums: List[int]) -> List[List[int]]:
+    result = []
+    def dfs(remains: int, path: List[int]):
+        n = len(remains)
+        if n == 0:
+            result.append(path)
+        else:
+            for i in range(n):
+                dfs(remains[:i] + remains[i+1:], path + [remains[i]])
+    dfs(nums, [])
+    return result
+
+nums = [1, 2, 3]
+print(permute(nums))
