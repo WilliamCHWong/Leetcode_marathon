@@ -613,3 +613,23 @@ class Solution:
         result_str = ''.join(map(str, result)).lstrip('0')
         
         return result_str if result_str else "0"
+    
+"""
+45. Jump Game II
+"""
+def jump(nums: List[int]) -> int:
+    maxPos = len(nums) - 1
+    def dfs (pos: int, count: int):
+        if pos + nums[pos] >= maxPos:
+            return 1 + count
+        else:
+            minJumps = 2^31 - 1
+            for i in range(nums[pos]):
+                jump = dfs(pos + i + 1, count + 1)
+                minJumps = min(jump, minJumps)
+            return minJumps
+    
+    return dfs(0, 0)
+
+nums = [2,3,1,1,4]
+print(jump(nums))
