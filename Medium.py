@@ -618,18 +618,24 @@ class Solution:
 45. Jump Game II
 """
 def jump(nums: List[int]) -> int:
-    maxPos = len(nums) - 1
-    def dfs (pos: int, count: int):
-        if pos + nums[pos] >= maxPos:
-            return 1 + count
-        else:
-            minJumps = 2^31 - 1
-            for i in range(nums[pos]):
-                jump = dfs(pos + i + 1, count + 1)
-                minJumps = min(jump, minJumps)
-            return minJumps
+    n = len(nums)
+
+    if n <= 1:
+        return 0
     
-    return dfs(0, 0)
+    l = r = 0
+    jumps = 0
+
+    while r < n - 1:
+        farthest = 0
+        for i in range(l, r + 1):
+            farthest = max(farthest, nums[i] + i)
+        l = r + 1
+        r = farthest
+        jumps += 1
+    
+    return jumps
+
 
 nums = [2,3,1,1,4]
 print(jump(nums))
