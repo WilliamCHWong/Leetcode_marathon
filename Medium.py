@@ -649,5 +649,31 @@ def permute(nums: List[int]) -> List[List[int]]:
     dfs(nums, [])
     return result
 
-nums = [1, 2, 3]
-print(permute(nums))
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()  # Sort to handle duplicates
+        result = []
+        visited = [False] * len(nums)
+        
+        def backtrack(path: List[int]):
+            # Base case: if the path length equals nums length, we have a full permutation
+            if len(path) == len(nums):
+                result.append(path[:])
+                return
+            
+            for i in range(len(nums)):
+                # Skip used elements or duplicates
+                if visited[i] or (i > 0 and nums[i] == nums[i - 1] and not visited[i - 1]):
+                    continue
+                
+                # Mark the current element as used
+                visited[i] = True
+                # Include nums[i] in the current path
+                backtrack(path + [nums[i]])
+                # Backtrack and unmark the current element
+                visited[i] = False
+        
+        # Start backtracking with an empty path
+        backtrack([])
+        return result
