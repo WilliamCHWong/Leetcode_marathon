@@ -687,18 +687,36 @@ class Solution:
 48. Rotate Image
 """
 
-def rotate(matrix: List[List[int]]) -> None:
-    n = len(matrix)
-    moved = [[False] * n for _ in range(n)]
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix)
+        moved = [[False] * n for _ in range(n)]
 
-    for i in range(n):
-        for j in range(n):
-            if moved[i][j] is False:
-                matrix[i][j], matrix[j][n-1-i], matrix[n-1-i][n-1-j], matrix[n-1-j][i] = matrix[n-1-j][i], matrix[i][j], matrix[j][n-1-i], matrix[n-1-i][n-1-j]
-                moved[i][j] = moved[j][n-1-i] = moved[n-1-i][n-1-j] = moved[n-1-j][i] = True
+        for i in range(n):
+            for j in range(n):
+                if moved[i][j] is False:
+                    matrix[i][j], matrix[j][n-1-i], matrix[n-1-i][n-1-j], matrix[n-1-j][i] = matrix[n-1-j][i], matrix[i][j], matrix[j][n-1-i], matrix[n-1-i][n-1-j]
+                    moved[i][j] = moved[j][n-1-i] = moved[n-1-i][n-1-j] = moved[n-1-j][i] = True
+        
+        return
+"""
+49. Group Anagrams
+"""
+
+def groupAnagrams(strs: List[str]) -> List[List[str]]:
+    dicts = {}
     
-    return
-
-matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
-rotate(matrix)
-print(matrix)
+    for word in strs:
+        # Sort the word to generate the key
+        sorted_word = "".join(sorted(word))
+        
+        # Group words by their sorted key
+        if sorted_word not in dicts:
+            dicts[sorted_word] = []
+        dicts[sorted_word].append(word)
+    
+    # Return the grouped dicts as a list of lists
+    return list(dicts.values())
