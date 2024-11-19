@@ -636,20 +636,25 @@ def jump(nums: List[int]) -> int:
     
     return jumps
 
+"""
+46. Permutations
+"""
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        def dfs(remains: int, path: List[int]):
+            n = len(remains)
+            if n == 0:
+                result.append(path)
+            else:
+                for i in range(n):
+                    dfs(remains[:i] + remains[i+1:], path + [remains[i]])
+        dfs(nums, [])
+        return result
 
-def permute(nums: List[int]) -> List[List[int]]:
-    result = []
-    def dfs(remains: int, path: List[int]):
-        n = len(remains)
-        if n == 0:
-            result.append(path)
-        else:
-            for i in range(n):
-                dfs(remains[:i] + remains[i+1:], path + [remains[i]])
-    dfs(nums, [])
-    return result
-
-
+"""
+47. Permutations II
+"""
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         nums.sort()  # Sort to handle duplicates
@@ -677,3 +682,19 @@ class Solution:
         # Start backtracking with an empty path
         backtrack([])
         return result
+
+"""
+48. Rotate Image
+"""
+
+def rotate(matrix: List[List[int]]) -> None:
+    n = len(matrix)
+    moved = [[False] * n] * n
+
+    def nextCoord(x: int, y: int):
+        return [y, n - 1 - x]
+
+    for i in range(n):
+        for j in range(n):
+            if moved[i][j] is False:
+                
