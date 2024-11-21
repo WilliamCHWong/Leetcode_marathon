@@ -693,15 +693,18 @@ class Solution:
         Do not return anything, modify matrix in-place instead.
         """
         n = len(matrix)
-        moved = [[False] * n for _ in range(n)]
-
-        for i in range(n):
-            for j in range(n):
-                if moved[i][j] is False:
-                    matrix[i][j], matrix[j][n-1-i], matrix[n-1-i][n-1-j], matrix[n-1-j][i] = matrix[n-1-j][i], matrix[i][j], matrix[j][n-1-i], matrix[n-1-i][n-1-j]
-                    moved[i][j] = moved[j][n-1-i] = moved[n-1-i][n-1-j] = moved[n-1-j][i] = True
-        
-        return
+        # By symmetry, only a quater need to start
+        for i in range(n // 2):
+            for j in range(i, n - 1 - i):
+                temp = matrix[i][j]
+                # left-bottom to left-up
+                matrix[i][j] = matrix[n-1-j][i]
+                # right-bottom to left-botom
+                matrix[n-1-j][i] = matrix[n-1-i][n-1-j]
+                # right-up to right-bottom
+                matrix[n-1-i][n-1-j] = matrix[j][n-1-i]
+                # left-up to right-up
+                matrix[j][n-1-i] = temp
 """
 49. Group Anagrams
 """
