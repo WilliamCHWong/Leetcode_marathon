@@ -756,3 +756,53 @@ class Solution:
             max_sum = max(max_sum, current_sum)
         
         return max_sum
+
+def spiralOrder(matrix: List[List[int]]) -> List[int]:
+    result = []
+    i = j = 0
+    vLimit = len(matrix) - 1
+    hLimit = len(matrix[0])
+
+    while vLimit > 0 or hLimit > 0:
+        print("H:", hLimit, "V: ", vLimit)
+        # Right
+        for _ in range(hLimit):
+            result.append(matrix[i][j])
+            j += 1
+        j -= 1
+        hLimit -= 1
+
+        print(i, "and", j)
+        
+        print("H:", hLimit, "V: ", vLimit)
+        # Down
+        i += 1
+        for _ in range(vLimit):
+            result.append(matrix[i][j])
+            i += 1
+        i -= 1
+        vLimit -= 1
+        
+        print("H:", hLimit, "V: ", vLimit)
+        # Left
+        for _ in range(hLimit):
+            result.append(matrix[i][j])
+            j -= 1
+        j += 1
+        hLimit -= 1
+    
+        print("H:", hLimit, "V: ", vLimit)
+        # Up
+        for _ in range(vLimit):
+            result.append(matrix[i][j])
+            i -= 1
+        vLimit -= 1
+        i += 1
+        j += 1
+    
+    return result
+
+matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+print(spiralOrder(matrix))
+
+# Output: [1,2,3,4,8,12,11,10,9,5,6,7]
