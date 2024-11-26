@@ -792,3 +792,17 @@ class Solution:
                 left += 1
 
         return result
+
+"""
+55. Jump Game
+"""
+def canJump(nums: List[int]) -> bool:
+    farthest = 0
+    final = len(nums) - 1
+    
+    for i in range(final + 1):
+        if i > farthest:
+            return False
+        farthest = max(farthest, nums[i] + i)
+    
+    return True
