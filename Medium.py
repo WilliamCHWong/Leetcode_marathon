@@ -757,52 +757,38 @@ class Solution:
         
         return max_sum
 
-def spiralOrder(matrix: List[List[int]]) -> List[int]:
-    result = []
-    i = j = 0
-    vLimit = len(matrix) - 1
-    hLimit = len(matrix[0])
-
-    while vLimit > 0 or hLimit > 0:
-        print("H:", hLimit, "V: ", vLimit)
-        # Right
-        for _ in range(hLimit):
-            result.append(matrix[i][j])
-            j += 1
-        j -= 1
-        hLimit -= 1
-
-        print(i, "and", j)
+"""
+54. Spiral Matrix
+"""
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        result = []
+        top = left = 0
+        bottom = len(matrix) - 1
+        right = len(matrix[0]) - 1
         
-        print("H:", hLimit, "V: ", vLimit)
-        # Down
-        i += 1
-        for _ in range(vLimit):
-            result.append(matrix[i][j])
-            i += 1
-        i -= 1
-        vLimit -= 1
-        
-        print("H:", hLimit, "V: ", vLimit)
-        # Left
-        for _ in range(hLimit):
-            result.append(matrix[i][j])
-            j -= 1
-        j += 1
-        hLimit -= 1
-    
-        print("H:", hLimit, "V: ", vLimit)
-        # Up
-        for _ in range(vLimit):
-            result.append(matrix[i][j])
-            i -= 1
-        vLimit -= 1
-        i += 1
-        j += 1
-    
-    return result
+        while top <= bottom and left <= right:
 
-matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
-print(spiralOrder(matrix))
+            # Right
+            for i in range(left, right + 1):
+                result.append(matrix[top][i])
+            top += 1
 
-# Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+            # Down
+            for i in range(top, bottom + 1):
+                result.append(matrix[i][right])
+            right -= 1
+
+            # Left
+            if top <= bottom:
+                for i in range(right, left - 1, -1):
+                    result.append(matrix[bottom][i])
+                bottom -= 1
+
+            # Up
+            if left <= right:
+                for i in range(bottom, top - 1, -1):
+                    result.append(matrix[i][left])
+                left += 1
+
+        return result
