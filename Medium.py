@@ -810,22 +810,26 @@ def canJump(nums: List[int]) -> bool:
 """
 56. Merge Intervals
 """
-def merge(intervals: List[List[int]]) -> List[List[int]]:
-    results = []
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # Empty input
+        if not intervals:  # Handle empty input
+            return []
 
-    for interval in intervals:
-        amend = False
-        for result in results:
-            if interval[0] >= result[0] and interval[0] <= result[1] and interval[1] > result[1]:
-                result[1] = interval[1]
-                amend = True
-            elif interval[1] >= result[0] and interval[1] <= result[1] and interval[0] < result[0]:
-                result[0] = interval[0]
-                amend = True
-        if amend is False:
-            results.append(interval)
-            
-    return results
+        # Sort
+        intervals.sort(key=lambda x: x[0])
 
-intervals = [[1,4],[4,5]]
-print(merge(intervals))
+        results = [intervals[0]]
+
+        for current in intervals[1:]:
+            last = results[-1]
+
+            # Check overlap
+            if current[0] <= last[1]:
+                # Update interval
+                last[1] = max(last[1], current[1])
+            else:
+                # Append for no overlap
+                results.append(current)
+
+        return results
