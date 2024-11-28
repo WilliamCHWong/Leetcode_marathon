@@ -806,3 +806,26 @@ def canJump(nums: List[int]) -> bool:
         farthest = max(farthest, nums[i] + i)
     
     return True
+
+"""
+56. Merge Intervals
+"""
+def merge(intervals: List[List[int]]) -> List[List[int]]:
+    results = []
+
+    for interval in intervals:
+        amend = False
+        for result in results:
+            if interval[0] >= result[0] and interval[0] <= result[1] and interval[1] > result[1]:
+                result[1] = interval[1]
+                amend = True
+            elif interval[1] >= result[0] and interval[1] <= result[1] and interval[0] < result[0]:
+                result[0] = interval[0]
+                amend = True
+        if amend is False:
+            results.append(interval)
+            
+    return results
+
+intervals = [[1,4],[4,5]]
+print(merge(intervals))
