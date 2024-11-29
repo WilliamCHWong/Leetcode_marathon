@@ -833,3 +833,43 @@ class Solution:
                 results.append(current)
 
         return results
+
+"""
+57. Insert Interval
+"""
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        results = []
+        added = False
+
+        for interval in intervals:
+
+            if added or interval[1] < newInterval[0]:
+                results.append(interval)
+
+            # Case 1: newInterval too large
+            elif interval[1] < newInterval[0]:
+                results.append(interval)
+            
+            # Case 2: Back end overlaps with newInterval
+            elif interval[0] <= newInterval[0] <= interval[1] and interval[1] < newInterval[1]:
+                newInterval[0] = interval[0]
+            
+            # Case 3:
+            elif interval[0] <= newInterval[0] and newInterval[1] <= interval[1]:
+                results.append(interval)
+                added = True
+            
+            # Case 4: Front end overlaps with newInterval
+            elif interval[0] <= newInterval[1] <= interval[1] and newInterval[1] < interval[1]:
+                newInterval[1] = interval[1]
+
+            elif newInterval[1] < interval[0]:
+                results.append(newInterval)
+                results.append(interval)
+                added = True
+        
+        if not intervals or not added:
+            results.append(newInterval)
+
+        return results
