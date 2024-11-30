@@ -873,3 +873,42 @@ class Solution:
             results.append(newInterval)
 
         return results
+
+"""
+59. Spiral Matrix II
+"""
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        results = [[0 for _ in range(n)] for _ in range(n)]
+        top, bottom, left, right = 0, n - 1, 0, n - 1
+        content = 1
+        
+        while content <= n * n:
+
+            # Right
+            for i in range(left, right + 1):
+                results[top][i] = content
+                content += 1
+            top += 1
+
+            # Down
+            for i in range(top, bottom + 1):
+                results[i][right] = content
+                content += 1
+            right -= 1
+
+            # Left
+            if top <= bottom:
+                for i in range(right, left - 1, -1):
+                    results[bottom][i] = content
+                    content += 1
+                bottom -= 1
+
+            # Up
+            if left <= right:
+                for i in range(bottom, top - 1, -1):
+                    results[i][left] = content
+                    content += 1
+                left += 1
+
+        return results
