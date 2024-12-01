@@ -1,10 +1,11 @@
-n = 3
-results = [[0 for _ in range(n)] for _ in range(n)]
-top, bottom, left, right = 0, n - 1, 0, n - 1
-content = 1
+def bitwisePlus (x: int, y: int)->int:
+    while y != 0:
+        carry = (x & y) << 1
+        remain = x ^ y
 
-for i in range (0, n):
-    results[0][i] = content
-    content += 1
+        x = remain
+        y = carry
 
-print(results)
+    return x
+
+print(bitwisePlus(3, 5))
