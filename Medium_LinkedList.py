@@ -106,3 +106,19 @@ class Solution:
         current.next = head
 
         return new_head
+
+"""
+62. Unique Paths
+"""
+
+# Possible path combination is a binomial coefficient
+# (n + m - 2) C (m - 1)
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        def factorial(k: int) -> int:
+            result = 1
+            for i in range(2, k + 1):
+                result *= i
+            return result
+
+        return factorial(m + n - 2) // (factorial(m - 1) * factorial(n - 1))
