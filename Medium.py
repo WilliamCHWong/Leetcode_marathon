@@ -912,3 +912,41 @@ class Solution:
                 left += 1
 
         return results
+
+"""
+62. Unique Paths
+"""
+
+# Possible path combination is a binomial coefficient
+# (n + m - 2) C (m - 1)
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        def factorial(k: int) -> int:
+            result = 1
+            for i in range(2, k + 1):
+                result *= i
+            return result
+
+        return factorial(m + n - 2) // (factorial(m - 1) * factorial(n - 1))
+
+"""
+63. Unique Paths II
+"""
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+
+        matrix = [[0 for _ in range(n)] for _ in range(m)]
+        matrix[0][0] = 1
+        for i in range(m):
+            for j in range(n):
+                if obstacleGrid[i][j] == 1:
+                    matrix[i][j] = 0
+                else:
+                    if obstacleGrid[i - 1][j] == 0 and i > 0:
+                        matrix[i][j] += matrix[i - 1][j]
+                    if obstacleGrid[i][j - 1] == 0 and j > 0:
+                        matrix[i][j] += matrix[i][j - 1]
+
+        return matrix[m - 1][n - 1]
