@@ -972,3 +972,22 @@ class Solution:
 
         return grid[m - 1][n - 1]
 
+"""
+71. Simplify Path
+"""
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        parts = path.split("/")
+        stack = []
+
+        for part in parts:
+            # One level up
+            if part == "..":
+                if stack:
+                    stack.pop()
+            # Ignore "."
+            elif part and part != ".":
+                stack.append(part)
+        
+        return "/" + "/".join(stack)
+
