@@ -991,3 +991,30 @@ class Solution:
         
         return "/" + "/".join(stack)
 
+"""
+72. Edit Distance
+"""
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        m, n = len(word1), len(word2)
+        
+        # Swap by size
+        if m < n:
+            word1, word2 = word2, word1
+            m, n = n, m
+
+        # Dynamic programming array
+        dp = list(range(n + 1))
+
+        for i in range(1, m + 1):
+            prev = dp[:]
+            dp[0] = i
+            for j in range(1, n + 1):
+                if word1[i - 1] == word2[j - 1]:
+                    # No new operation for identical character
+                    dp[j] = prev[j - 1]
+                else:
+                    # Insert, delete or replace
+                    dp[j] = 1 + min(prev[j], dp[j - 1], prev[j - 1])
+        
+        return dp[-1]
