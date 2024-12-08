@@ -1019,7 +1019,9 @@ class Solution:
         
         return dp[-1]
 
+"""
 
+"""
 class Solution:
     def setZeroes(self, matrix: List[List[int]]) -> None:
         """
@@ -1051,3 +1053,27 @@ class Solution:
         if first_col_zero:
             for i in range(m):
                 matrix[i][0] = 0
+
+"""
+74. Search a 2D Matrix
+"""
+def searchMatrix(matrix: List[List[int]], target: int) -> bool:
+    m, n = len(matrix), len(matrix[0])
+    min, max = 0, n * m -1
+
+    while min < max:
+        mid = (min + max) // 2
+        # Turn coordinate to index value
+        i = mid // n
+        j = mid % n
+
+        if target == matrix[i][j]:
+            return True
+        
+        elif target < matrix[i][j]:
+            max = mid - 1
+        
+        else:
+            min = mid + 1
+    
+    return False
