@@ -1080,3 +1080,25 @@ class Solution:
                 min, max = mid + 1, max - 1
 
         return False
+
+"""
+75. Sort Colors
+"""
+def sortColors(nums: List[int]) -> None:
+    n = len(nums)
+    # Count numbers of each colors
+    zero, one = 0, 0
+
+    for num in nums:
+        if num == 0:
+            zero += 1
+        elif num == 1:
+            one += 1
+
+    # Overwrite the array
+    for i in range(zero):
+        nums[i] = 0
+    for i in range(zero, zero + one):
+        nums[i] = 1
+    for i in range(zero + one, n):
+        nums[i] = 2
