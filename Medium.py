@@ -1057,23 +1057,26 @@ class Solution:
 """
 74. Search a 2D Matrix
 """
-def searchMatrix(matrix: List[List[int]], target: int) -> bool:
-    m, n = len(matrix), len(matrix[0])
-    min, max = 0, n * m -1
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m, n = len(matrix), len(matrix[0])
+        min, max = 0, n * m -1
 
-    while min < max:
-        mid = (min + max) // 2
-        # Turn coordinate to index value
-        i = mid // n
-        j = mid % n
+        def convert(index: int) -> int:
+            i = index // n
+            j = index % n
+            return matrix[i][j]
+        
+        while min <= max:
+            mid = (min + max) // 2
 
-        if target == matrix[i][j]:
-            return True
-        
-        elif target < matrix[i][j]:
-            max = mid - 1
-        
-        else:
-            min = mid + 1
-    
-    return False
+            if target == convert(mid) or target == convert(min) or target == convert(max):
+                return True
+            
+            elif target < convert(mid):
+                min, max = min + 1, mid - 1
+            
+            else:
+                min, max = mid + 1, max - 1
+
+        return False
