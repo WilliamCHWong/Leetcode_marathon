@@ -1102,3 +1102,28 @@ def sortColors(nums: List[int]) -> None:
         nums[i] = 1
     for i in range(zero + one, n):
         nums[i] = 2
+
+"""
+77. Combinations
+"""
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        result = []
+
+        # Helper function to manage paths
+        def genPath(start: int, k: int, path: List[int]):
+            # Stop when length is achieved
+            if len(path) == k:
+                result.append(path[:])
+                return
+
+            # Generate new path starting from start
+            for i in range(start, n + 1):
+                path.append(i)
+                genPath(i + 1, k, path)
+                path.pop()
+        
+        # Initialize
+        genPath(1, k, [])
+
+        return result
