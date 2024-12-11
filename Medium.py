@@ -1148,3 +1148,42 @@ class Solution:
         furtherPath(0, [])
 
         return result
+
+"""
+79. Word Search
+"""
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        m, n = len(board), len(board[0])
+
+        def check(i: int, j: int, ptr: int) -> bool:
+            if ptr == len(word):  # All characters matched
+                return True
+            
+            if i < 0 or i >= m or j < 0 or j >= n or board[i][j] != word[ptr]:
+                return False
+            
+            # Temporarily mark the cell as visited
+            temp = board[i][j]
+            board[i][j] = '#'
+
+            # Explore all four directions
+            found = (
+                check(i - 1, j, ptr + 1) or  # Up
+                check(i + 1, j, ptr + 1) or  # Down
+                check(i, j - 1, ptr + 1) or  # Left
+                check(i, j + 1, ptr + 1)     # Right
+            )
+
+            # Restore the cell
+            board[i][j] = temp
+
+            return found
+
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == word[0]:  # Start the search
+                    if check(i, j, 0):
+                        return True
+        
+        return False
