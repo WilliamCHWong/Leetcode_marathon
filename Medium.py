@@ -1127,3 +1127,24 @@ class Solution:
         genPath(1, k, [])
 
         return result
+    
+"""
+78. Subsets
+"""
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        result = [[]]
+        n = len(nums)
+
+        def furtherPath(start: int, path: List[int]):
+            if start >= n:
+                return
+            for i in range(start, n):
+                path.append(nums[i])
+                result.append(path[:])
+                furtherPath(i + 1, path)
+                path.pop()
+        
+        furtherPath(0, [])
+
+        return result
