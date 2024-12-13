@@ -1187,3 +1187,19 @@ class Solution:
                         return True
         
         return False
+    
+"""
+80. Remove Duplicates from Sorted Array II
+"""
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        i = 0
+        n = len(nums)
+        while i < n:
+            # Check with the previous
+            if i > 1 and nums[i] == nums[i - 1] and nums[i] == nums[i - 2]:
+                del nums[i]
+                n -= 1
+            else:
+                i += 1
+        return i
