@@ -107,3 +107,31 @@ class Solution:
 
         return new_head
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # Make dummy to handle head removal
+        dummy = ListNode(0, head)
+        slow = dummy
+        fast = head
+
+        while fast:
+            # Check duplicate
+            if fast.next and fast.val == fast.next.val:
+                # Skip all duplicates
+                while fast.next and fast.val == fast.next.val:
+                    fast = fast.next
+                # Removal action
+                slow.next = fast.next
+            else:
+                slow = slow.next
+            fast = fast.next
+
+        return dummy.next
