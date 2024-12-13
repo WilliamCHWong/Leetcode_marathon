@@ -1,29 +1,32 @@
 from typing import List
 
-board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
-word = "SEE"
-ptr = 0
-m, n, w = len(board), len(board[0]), len(word)
+def search(nums: List[int], target: int) -> bool:
+    n = len(nums) - 1
 
-def check(i: int, j: int, ptr: int):
-    up = down = left = right = False
+    i = 0
+    while nums[i] <= nums[i + 1] and i  < n:
+        i += 1
 
-    if ptr >= w:
-        return True
+    def toIndex(k: int):
+        return (k + i + 1) % n
     
-    # Up
-    if i > 0 and board[i - 1][j] == word[ptr]:
-        up = check(i - 1, j, ptr + 1)
-    # Down
-    if i < m - 1 and board[i + 1][j] == word[ptr]:
-        down = check(i + 1, j, ptr + 1)
-    # Right
-    if j < n - 1 and board[i][j + 1] == word[ptr]:
-        right = check(i, j + 1, ptr + 1)
-    # Left
-    if j > 0 and board[i][j - 1] == word[ptr]:
-        left = check(i, j - 1, ptr + 1)
-    
-    return up or down or right or left
+    left, right = 0, n - 1
 
-print(check(1, 3, 1))
+    while left <= right:
+        mid = (left + right) // 2
+
+        if nums[toIndex(mid)] == target or nums[toIndex(left)] == target or nums[toIndex(right)] == target:
+            return True
+        
+        elif nums[toIndex(mid)] < target:
+            left = mid + 1
+        
+        else:
+            right  = mid - 1
+    
+    return False
+
+nums = [2,5,6,0,0,1,2]
+target = 0
+
+print(search(nums, target))
