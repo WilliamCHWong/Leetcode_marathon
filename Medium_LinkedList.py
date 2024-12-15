@@ -135,3 +135,34 @@ class Solution:
             fast = fast.next
 
         return dummy.next
+
+"""
+86. Partition List
+"""
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        # Dummy nodes for the two partitions
+        less_head = ListNode(0)
+        greater_head = ListNode(0)
+        
+        # Pointers to build the two lists
+        less = less_head
+        greater = greater_head
+        
+        # Traverse the original list
+        while head:
+            if head.val < x:
+                less.next = head
+                less = less.next
+            else:
+                greater.next = head
+                greater = greater.next
+            head = head.next
+        
+        # Ensure the last node of the greater list points to None
+        greater.next = None
+        
+        # Link the two partitions
+        less.next = greater_head.next
+        
+        return less_head.next
