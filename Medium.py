@@ -1235,3 +1235,17 @@ class Solution:
                     right = mid - 1
 
         return False
+
+"""
+89. Gray Code
+"""
+def grayCode(n: int) -> List[int]:
+    # Set max as 2^n
+    total_numbers = 1 << n
+    result = []
+    
+    for i in range(total_numbers):
+        gray = i ^ (i >> 1)
+        result.append(gray)
+    
+    return result
