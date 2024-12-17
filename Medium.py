@@ -1249,3 +1249,27 @@ def grayCode(n: int) -> List[int]:
         result.append(gray)
     
     return result
+
+"""
+90. Subsets II
+"""
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        result = [[]]
+        n = len(nums)
+        nums.sort()
+
+        def furtherPath(start: int, path: List[int]):
+            for i in range(start, n):
+                # Skip duplicates by checking if the current element is the same as the previous one
+                if i > start and nums[i] == nums[i - 1]:
+                    continue
+                path.append(nums[i])
+                result.append(path[:])
+                furtherPath(i + 1, path)
+                path.pop()
+        
+        furtherPath(0, [])
+        return result
+
+
