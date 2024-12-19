@@ -166,3 +166,24 @@ class Solution:
         less.next = greater_head.next
         
         return less_head.next
+
+"""
+92. Reverse Linked List II
+"""
+def reverseBetween(head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+    dummy = ListNode(0, head)
+    prev = dummy
+
+    for _ in range(left - 1):
+        prev = prev.next
+
+    reverse_start = prev.next
+    current = reverse_start.next
+
+    for _ in range(right - left):
+        reverse_start.next = current.next
+        current.next = prev.next
+        prev.next = current
+        current = reverse_start.next
+    
+    return dummy.next
