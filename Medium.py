@@ -1295,3 +1295,36 @@ class Solution:
                 dp[i] += dp[i - 2]
         
         return dp[n]
+
+"""
+93. Restore IP Addresses
+"""
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        result = []
+        n = len(s)
+
+        def generate(start: int, layer: int, path: List[str]):
+            # Base case: Four segments
+            if layer == 4 and start == n:
+                result.append('.'.join(path))
+                return
+            
+            # Run out of remain
+            if layer == 4 or start == n:
+                return
+            
+            for i in range(1, 4):
+                if start + i > n:
+                    break
+
+                segment = s[start: start + i]
+                
+                # Invalid segment
+                if (len(segment) > 1 and segment[0] == "0") or int(segment) > 255:
+                    continue
+
+                generate(start + i, layer + 1, path + [segment])
+
+        generate(0, 0, [])
+        return result
