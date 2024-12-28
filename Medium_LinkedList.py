@@ -187,3 +187,40 @@ def reverseBetween(head: Optional[ListNode], left: int, right: int) -> Optional[
         current = reverse_start.next
     
     return dummy.next
+
+"""
+95. Unique Binary Search Trees II
+"""
+class TreeNode:
+     def __init__(self, val=0, left=None, right=None):
+         self.val = val
+         self.left = left
+         self.right = right
+
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        # Base case
+        if n == 0:
+            return []
+        
+        def helpGenerate(start, end):
+            # Base Case
+            if start > end:
+                return [None]
+            
+            result = []
+            
+            for i in range(start, end + 1):
+                left_trees = helpGenerate(start, i - 1)
+                right_trees = helpGenerate(i + 1, end)
+
+                for left in left_trees:
+                    for right in right_trees:
+                        root = TreeNode(i)
+                        root.left = left
+                        root.right = right
+                        result.append(root)
+            
+            return result
+        
+        return helpGenerate(1, n)
