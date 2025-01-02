@@ -1339,11 +1339,13 @@ class Solution:
         # Base case
         dp[0], dp[1] = 1, 1
 
+        # Calculate for 2 to n nodes
         for i in range(2, n + 1):
             for j in range(1, i + 1):
+                # Number of BST in the left * number of BST in the right
                 dp[i] += dp[j - 1] * dp[i - j]
         
-        return dp[n]
+        return dp[n] 
     
 """
 97. Interleaving String
