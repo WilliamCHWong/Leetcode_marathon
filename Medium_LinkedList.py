@@ -224,3 +224,19 @@ class Solution:
             return result
         
         return helpGenerate(1, n)
+
+"""
+98. Validate Binary Search Tree
+"""
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def checkNodes(node: TreeNode, low: float, high: float) -> bool:
+            if not node:
+                return True
+            
+            if not (low < node.val < high):
+                return False
+            
+            return checkNodes(node.left, low, node.val) and checkNodes(node.right, node.val, high)
+
+        return checkNodes(root, float('-inf'), float('inf'))
