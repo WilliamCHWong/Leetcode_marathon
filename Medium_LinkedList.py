@@ -240,3 +240,38 @@ class Solution:
             return checkNodes(node.left, low, node.val) and checkNodes(node.right, node.val, high)
 
         return checkNodes(root, float('-inf'), float('inf'))
+
+"""
+99. Recover Binary Search Tree
+"""
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        first = second = prev = None
+
+        # Helper function
+        def inorder(node):
+            nonlocal first, second, prev
+            if not node:
+                return
+            
+            inorder(node.left)
+            
+            # Detect swapped nodes
+            if prev and node.val < prev.val:
+                if not first:  # First anomaly
+                    first = prev
+                second = node  # Second anomaly
+            
+            # Update node
+            prev = node
+            
+            inorder(node.right)
+        
+        inorder(root)
+
+        # Swap
+        if first and second:
+            first.val, second.val = second.val, first.val
