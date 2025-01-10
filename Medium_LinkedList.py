@@ -283,14 +283,16 @@ from collections import deque
 
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        # Base case: Empty list
         if not root:
             return []
         
         result = []
         queue = deque([root])
 
-
+        # Iterate until all nodes are processed
         while queue:
+            # Store all nodes at the same level
             length = len(queue)
             level = []
 
@@ -312,6 +314,7 @@ class Solution:
 """
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        # Base case: Empty list
         if not root:
             return []
         
