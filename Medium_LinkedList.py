@@ -342,4 +342,25 @@ class Solution:
         return result
 
 """
+105. Construct Binary Tree from Preorder and Inorder Traversal
+"""
+def buildTree(preorder, inorder):
+    if not preorder or not inorder:
+        return None
+
+    # Step 1: Identify the root
+    root_val = preorder[0]
+    root = TreeNode(root_val)
+
+    # Step 2: Find the root in the inorder list
+    root_index = inorder.index(root_val)
+
+    # Step 3: Recursively construct left and right subtrees
+    root.left = buildTree(preorder[1:1+root_index], inorder[:root_index])
+    root.right = buildTree(preorder[1+root_index:], inorder[root_index+1:])
+
+    return root
+
+"""
+
 """
