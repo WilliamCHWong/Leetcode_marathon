@@ -347,22 +347,32 @@ class Solution:
 """
 105. Construct Binary Tree from Preorder and Inorder Traversal
 """
-def buildTree(preorder, inorder):
-    if not preorder or not inorder:
-        return None
+class Solution:
+    def buildTree(self, preorder, inorder):
+        # Create a hashmap for quick lookup of root index in inorder
+        inorder_map = {val: idx for idx, val in enumerate(inorder)}
+        preorder_index = 0
 
-    # Step 1: Identify the root
-    root_val = preorder[0]
-    root = TreeNode(root_val)
+        def helper(left, right):
+            nonlocal preorder_index
+            # Base case: if there are no elements to construct the tree
+            if left > right:
+                return None
+            
+            # Pick the current root value from preorder traversal
+            root_val = preorder[preorder_index]
+            preorder_index += 1
+            
+            # Create the tree node
+            root = TreeNode(root_val)
+            
+            # Recursively construct the left and right subtrees
+            root.left = helper(left, inorder_map[root_val] - 1)
+            root.right = helper(inorder_map[root_val] + 1, right)
+            
+            return root
 
-    # Step 2: Find the root in the inorder list
-    root_index = inorder.index(root_val)
-
-    # Step 3: Recursively construct left and right subtrees
-    root.left = buildTree(preorder[1:1+root_index], inorder[:root_index])
-    root.right = buildTree(preorder[1+root_index:], inorder[root_index+1:])
-
-    return root
+        return helper(0, len(inorder) - 1)
 
 """
 
