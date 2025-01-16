@@ -375,5 +375,32 @@ class Solution:
         return helper(0, len(inorder) - 1)
 
 """
-
+106. Construct Binary Tree from Inorder and Postorder Traversal
 """
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        # Create a hashmap for quick lookup of root index in inorder
+        inorder_map = {val: idx for idx, val in enumerate(inorder)}
+        postorder_index = len(postorder) - 1  # Start from the last element in postorder
+
+        def helper(left, right):
+            nonlocal postorder_index
+            # Base case: if there are no elements to construct the tree
+            if left > right:
+                return None
+            
+            # Pick the current root value from postorder traversal
+            root_val = postorder[postorder_index]
+            postorder_index -= 1
+            
+            # Create the tree node
+            root = TreeNode(root_val)
+            
+            # Recursively construct the right and left subtrees
+            # Note: Postorder visits left -> right -> root, so we build the right subtree first
+            root.right = helper(inorder_map[root_val] + 1, right)
+            root.left = helper(left, inorder_map[root_val] - 1)
+            
+            return root
+
+        return helper(0, len(inorder) - 1)
