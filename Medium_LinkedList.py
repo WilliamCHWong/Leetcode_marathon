@@ -404,3 +404,40 @@ class Solution:
             return root
 
         return helper(0, len(inorder) - 1)
+
+"""
+107. Binary Tree Level Order Traversal II
+"""
+
+class Solution:
+    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+        # Base case: Empty list
+        if not root:
+            return []
+        
+        stack = deque()
+        queue = deque([root])
+
+        while queue:
+            length = len(queue)
+            level = []
+
+            for _ in range(length):
+                node = queue.popleft()
+                level.append(node.val)
+
+                if node.left:
+                    queue.append(node.left.val)
+
+                if node.right:
+                    queue.append(node.right.val)
+            
+            stack.append(level)
+        
+        result = []
+
+        while stack:
+            result.append(stack.pop())
+        
+        return result
+
