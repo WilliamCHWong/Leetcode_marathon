@@ -411,7 +411,7 @@ class Solution:
 
 class Solution:
     def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
-        # Base case: Empty list
+        # Base case: Empty tree
         if not root:
             return []
         
@@ -426,18 +426,23 @@ class Solution:
                 node = queue.popleft()
                 level.append(node.val)
 
+                # Append children nodes to the queue
                 if node.left:
-                    queue.append(node.left.val)
-
+                    queue.append(node.left)
                 if node.right:
-                    queue.append(node.right.val)
+                    queue.append(node.right)
             
+            # Append the current level to the stack
             stack.append(level)
         
         result = []
 
+        # Reverse the order by popping levels from the stack
         while stack:
             result.append(stack.pop())
         
         return result
 
+"""
+
+"""
